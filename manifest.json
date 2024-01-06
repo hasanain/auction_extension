@@ -1,0 +1,16 @@
+{
+  "name": "Sierra auction extension",
+  "description": "Add test123 to body",
+  "version": "1.0",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://sierraauction.auctioneersoftware.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "manifest_version": 3
+}
