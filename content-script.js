@@ -61,14 +61,46 @@ function getActualPriceNode(prefix, bid) {
   );
   return node;
 }
+const getForm = () => {
+  // Create the main container div with class "calculator-form"
+  const calculatorFormDiv = document.createElement('div');
+  calculatorFormDiv.className = 'calculator-form';
+
+  // Create the nested div with class "extension-form"
+  const extensionFormDiv = document.createElement('div');
+  extensionFormDiv.className = 'extension-form';
+
+  // Create the input element with type "text" and a placeholder
+  const inputElement = document.createElement('input');
+  inputElement.type = 'text';
+  inputElement.placeholder = 'input your bid amount';
+
+
+  // Append the input element to the "extension-form" div
+  extensionFormDiv.appendChild(inputElement);
+
+  // Create the div with class "extension-bid-display"
+  const extensionBidDisplayDiv = document.createElement('div');
+  extensionBidDisplayDiv.className = 'extension-bid-display';
+  extensionBidDisplayDiv.textContent = 'Calculated Bid Amount: ...';
+
+  // Append the "extension-form" and "extension-bid-display" divs to the main container
+  calculatorFormDiv.appendChild(extensionFormDiv);
+  calculatorFormDiv.appendChild(extensionBidDisplayDiv);
+
+  inputElement.addEventListener('input', function() {
+    // Update the text content of the "extension-bid-display" div with the input field value
+    extensionBidDisplayDiv.textContent = `Calculated Bid Amount: ${getActualPrice(Number(inputElement.value))}`;
+  });
+  return calculatorFormDiv
+}
 const showBidAmount = () => {
   const currentBid = document.querySelector('.currentBid .bidAmt')
   const bid = getBidFromFormattedNumber(currentBid.innerHTML)
   document.querySelector('.bidActions').appendChild(getActualPriceNode('Actual price', bid))
   const bidIncrement = getBidFromFormattedNumber(document.querySelector('#bidIncrement span').innerHTML.match(/\$[0-9,.]+/)[0])
   document.querySelector('.bidActions').appendChild(getActualPriceNode(`Next Bid (${bid + bidIncrement}) Price`, bid + bidIncrement))
-
+  document.querySelector('.bidActions').appendChild(getForm())
 }
-setTimeout(showBidAmount)
 
 setTimeout(showBidAmount, 500)
