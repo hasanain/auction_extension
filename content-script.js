@@ -71,4 +71,4 @@ const showBidAmount = () => {
 }
 setTimeout(showBidAmount)
 
-setInterval(showBidAmount, 500)
+setTimeout(showBidAmount, 500)
