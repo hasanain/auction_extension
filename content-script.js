@@ -55,6 +55,8 @@ const formatter = new Intl.NumberFormat("en-US", {
 function getActualPriceNode(prefix, bid) { 
   const actualPrice = getActualPrice(bid)
   const node = document.createElement("div");
+  node.style.fontSize = '16px'; // Set the font size
+  node.style.color = 'black'; // Set the text color
   node.classList.add('.unique-class')
   node.appendChild(
     document.createTextNode(`${prefix}: ${formatter.format(actualPrice)}`)
@@ -65,6 +67,9 @@ const getForm = () => {
   // Create the main container div with class "calculator-form"
   const calculatorFormDiv = document.createElement('div');
   calculatorFormDiv.className = 'calculator-form';
+  // Add CSS styles to the "extension-bid-display" div
+  calculatorFormDiv.style.fontSize = '16px'; // Set the font size
+  calculatorFormDiv.style.color = 'black'; // Set the text color
 
   // Create the nested div with class "extension-form"
   const extensionFormDiv = document.createElement('div');
@@ -90,7 +95,7 @@ const getForm = () => {
 
   inputElement.addEventListener('input', function() {
     // Update the text content of the "extension-bid-display" div with the input field value
-    extensionBidDisplayDiv.textContent = `Calculated Bid Amount: ${getActualPrice(Number(inputElement.value))}`;
+    extensionBidDisplayDiv.textContent = `Calculated Bid Amount: $${getActualPrice(Number(inputElement.value))}`;
   });
   return calculatorFormDiv
 }
